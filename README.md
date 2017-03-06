@@ -6,11 +6,10 @@ This program will translate _english_ to [pig latin](https://en.wikipedia.org/wi
 This project is developed in Python2.7
 
 To execute:
-'''
+
     python main.p
-'''
+
 
 To get the git commit graph:
-'''
+
     git log --graph --abbrev-commit --decorate --date=relative --all
-'''
