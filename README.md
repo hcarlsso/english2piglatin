@@ -13,3 +13,7 @@ To execute:
 To get the git commit graph:
 
     git log --graph --abbrev-commit --decorate --date=relative --all
+
+To run tests:
+
+    python -m unittest discover
