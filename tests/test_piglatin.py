@@ -49,7 +49,7 @@ class TestStringMethods(unittest.TestCase):
             "Hello",
             "Ellohay",
             "Please",
-            "Leasepay",
+            "Easeplay",
             "What time is it?",
             "Hatway imetay ishay ithay?",
             "How is the weather?",
@@ -113,13 +113,13 @@ class TestStringMethods(unittest.TestCase):
             "Call me",
             "Allcay emay",
             "Here is my number",
-            "Erehay ishay ymay umbernay",
+            "Erehay isway ymay umbernay",
             "Don’t tell them",
             "On’tday elltay hemtay",
             "This is a secret",
-            "Histay ishay ayay ecretsay",
+            "Isthay isway away ecretsay",
             "Please remind me",
-            "Leasepay emindray emay",
+            "Easeplay emindray emay",
             "No way",
             "Onay ayway"]
 
@@ -127,6 +127,7 @@ class TestStringMethods(unittest.TestCase):
         ref = examples[1::2]
         out = [piglatin.english_text_to_piglatin(eng) for eng in inp]
 
+        self.maxDiff = None
         self.assertEqual(tuple(out),tuple(ref))
 
 if __name__ == '__main__':

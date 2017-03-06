@@ -1,22 +1,36 @@
 #! /usr/bin/python2.7
 
-'''Return the piglatin equivalent of a single paragraph
-'''
 def english_text_to_piglatin(paragraph):
+    '''Return the piglatin equivalent of a single paragraph
+    '''
     paras = paragraph.split('\n')
-    return '\n'.join([english_paragraph_to_piglatin(para) for para in paras])
+    try:
+        return '\n'.join([english_paragraph_to_piglatin(para) for para in paras])
+    except:
+        print "The text is: " + paragraph
+        raise
 
-'''Return the piglatin equivalent of a single paragraph
-'''
 def english_paragraph_to_piglatin(paragraph):
+    '''Return the piglatin equivalent of a single paragraph
+    '''
     sentences = paragraph.split('.')
-    return '.'.join([english_sentence_to_piglatin(sentence) for sentence in sentences])
+    try:
+        return '.'.join([english_sentence_to_piglatin(sentence) for sentence in sentences])
+    except:
+        print "The paragraph is: " + paragraph
+        raise
 
-'''Return the piglatin equivalent of a single sentence
-'''
+
 def english_sentence_to_piglatin(line):
+    '''Return the piglatin equivalent of a single sentence
+    '''
     words = line.split(' ')
-    return ' '.join([english_word_to_piglatin(word) for word in words])
+    try:
+        return ' '.join([english_word_to_piglatin(word) for word in words])
+    except:
+        print "The line is: " + line
+        raise
+
 
 '''Return the piglatin equivalent of a single word
 '''
@@ -27,7 +41,7 @@ def english_word_to_piglatin(word):
 
     # Check that the word starts with a letter
     if not word[0].isalpha():
-        raise ValueError, 'Unexpected character ' + word[0] + '. Aborting'
+        return word
 
     # Check for capitalization
     if word.istitle():
@@ -41,9 +55,9 @@ def english_word_to_piglatin(word):
     consonant_suffix = 'ay'
 
     if _is_consonant(word[0]): # First letter is a consonant
-        return_word = _consonant_word_to_piglatin(word, consonant_suffix)
+        return_word = _consonant_word_to_piglatin(word) + consonant_suffix
     else: # First letter is a vowel
-        return_word = word + 'way'
+        return_word = word + vowel_suffix
 
     if cap_flag:
         return return_word.title()
@@ -51,7 +65,7 @@ def english_word_to_piglatin(word):
         return return_word
 
 
-def _consonant_word_to_piglatin(word, suffix):
+def _consonant_word_to_piglatin(word):
     '''Return piglatin equivalent of a word beginning with a
     consonant cluster'''
     def _rearrange_letters(word, cluster = ''):
@@ -59,12 +73,16 @@ def _consonant_word_to_piglatin(word, suffix):
             return cluster
         elif not word[0].isalpha():
             raise ValueError, 'Unexpected character ' + word[0] + '. Aborting'
-        elif _is_consonant(word[0]) and not word[0] == 'y': # Add to consonant cluster and keep checking
+        elif _is_consonant(word[0]) and not word[0] == 'y' : # Add to consonant cluster and keep checking
             return _rearrange_letters(word[1:], cluster + word[0])
-        else: # reached a vowel
-            return word + cluster
 
-    return _rearrange_letters(word) + suffix # Add suffix to rearranged letters
+        else: # reached a vowel
+            if word[1::] == cluster:
+                return word
+            else:
+                return word + cluster
+
+    return _rearrange_letters(word)
 
 
 def _is_consonant(letter):
