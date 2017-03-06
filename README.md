@@ -5,5 +5,7 @@ This program will translate _english_ to [pig latin](https://en.wikipedia.org/wi
 
 This project is developed in Python2.7
 
+Supports English to Piglatin conversion for text provided as user input.
+
 To execute:
->>> python main.py 
+python main.py 
