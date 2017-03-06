@@ -28,23 +28,36 @@ def english_word_to_piglatin(word):
     # Check that the word starts with a letter
     if not word[0].isalpha():
         raise ValueError, 'Unexpected character ' + word[0] + '. Aborting'
-    
+
+    # Check for capitalization
+    if word.istitle():
+        cap_flag = True
+        word = word.lower()
+    else:
+        cap_flag = False
+
     # Construct suffixes based on word capitalization
     vowel_suffix = 'way'
     consonant_suffix = 'ay'
 
     if _is_consonant(word[0]): # First letter is a consonant
-        return _consonant_word_to_piglatin(word, consonant_suffix)
+        return_word = _consonant_word_to_piglatin(word, consonant_suffix)
     else: # First letter is a vowel
-        return word + 'way'
+        return_word = word + 'way'
 
-'''Return piglatin equialent of a word beginning with a
-   cosonant cluster'''
+    if cap_flag:
+        return return_word.title()
+    else:
+        return return_word
+
+
 def _consonant_word_to_piglatin(word, suffix):
+    '''Return piglatin equivalent of a word beginning with a
+    consonant cluster'''
     def _rearrange_letters(word, cluster = ''):
         if len(word) == 0: # Needed when word contains only consonants
             return cluster
-        elif not word[0].isalpha(): 
+        elif not word[0].isalpha():
             raise ValueError, 'Unexpected character ' + word[0] + '. Aborting'
         elif _is_consonant(word[0]) and not word[0] == 'y': # Add to consonant cluster and keep checking
             return _rearrange_letters(word[1:], cluster + word[0])
@@ -53,7 +66,8 @@ def _consonant_word_to_piglatin(word, suffix):
 
     return _rearrange_letters(word) + suffix # Add suffix to rearranged letters
 
-'''Returns True if the letter is a consonant, otherwise
-   return False'''
+
 def _is_consonant(letter):
+    '''Returns True if the letter is a consonant, otherwise
+    return False'''
     return letter.isalpha() and letter.lower() not in ['a', 'e', 'i', 'o', 'u']
