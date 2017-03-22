@@ -9,7 +9,7 @@ Supports English to Piglatin conversion for text provided as user input.
 
 To execute:
 
-    python main.p
+    python main.py
 
 
 To get the git commit graph:
