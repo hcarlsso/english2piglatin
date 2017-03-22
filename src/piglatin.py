@@ -15,7 +15,6 @@ def english_paragraph_to_piglatin(paragraph):
     '''Return the piglatin equivalent of a single paragraph
     '''
     sentences = re.findall(r'(?:\d[,.!?]|[^,.!?])*(?:[,.!?]|$)', paragraph)[0:-1]
-    print sentences
     try:
         return ''.join([english_sentence_to_piglatin(sentence) for sentence in sentences])
     except:
