@@ -1,4 +1,5 @@
 #! /usr/bin/python2.7
+import re
 
 def english_text_to_piglatin(paragraph):
     '''Return the piglatin equivalent of a single paragraph
@@ -13,9 +14,10 @@ def english_text_to_piglatin(paragraph):
 def english_paragraph_to_piglatin(paragraph):
     '''Return the piglatin equivalent of a single paragraph
     '''
-    sentences = paragraph.split('.')
+    sentences = re.findall(r'(?:\d[,.!?]|[^,.!?])*(?:[,.!?]|$)', paragraph)[0:-1]
+    print sentences
     try:
-        return '.'.join([english_sentence_to_piglatin(sentence) for sentence in sentences])
+        return ''.join([english_sentence_to_piglatin(sentence) for sentence in sentences])
     except:
         print "The paragraph is: " + paragraph
         raise
@@ -50,6 +52,15 @@ def english_word_to_piglatin(word):
     else:
         cap_flag = False
 
+    # check for special character (.,?!) at the end of the word
+    special_char_flag = False
+    last_char = ''
+    if word[-1] in [',', '.','!', '?']:
+        special_char_flag = True
+        last_char = word[-1]
+        word = word[0:-1]
+    
+
     # Construct suffixes based on word capitalization
     vowel_suffix = 'way'
     consonant_suffix = 'ay'
@@ -59,6 +70,9 @@ def english_word_to_piglatin(word):
     else: # First letter is a vowel
         return_word = word + vowel_suffix
 
+    if special_char_flag:
+        return_word = return_word + last_char
+        
     if cap_flag:
         return return_word.title()
     else:
