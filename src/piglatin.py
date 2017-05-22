@@ -50,6 +50,13 @@ def english_word_to_piglatin(word):
     else:
         cap_flag = False
 
+    # Check question mark
+    if word[-1] == '?':
+        q_mark_flag = True
+        word = word[0:-2]
+    else:
+        q_mark_flag = False
+
     # Construct suffixes based on word capitalization
     vowel_suffix = 'way'
     consonant_suffix = 'ay'
@@ -58,6 +65,9 @@ def english_word_to_piglatin(word):
         return_word = _consonant_word_to_piglatin(word) + consonant_suffix
     else: # First letter is a vowel
         return_word = word + vowel_suffix
+
+    if q_mark_flag:
+        return_word += "?"
 
     if cap_flag:
         return return_word.title()
