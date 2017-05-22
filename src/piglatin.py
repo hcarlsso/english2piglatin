@@ -51,6 +51,7 @@ def english_word_to_piglatin(word):
     else:
         cap_flag = False
 
+
     # check for special character (.,?!) at the end of the word
     special_char_flag = False
     last_char = ''
@@ -58,8 +59,7 @@ def english_word_to_piglatin(word):
         special_char_flag = True
         last_char = word[-1]
         word = word[0:-1]
-    
-
+        
     # Construct suffixes based on word capitalization
     vowel_suffix = 'way'
     consonant_suffix = 'ay'
@@ -68,6 +68,7 @@ def english_word_to_piglatin(word):
         return_word = _consonant_word_to_piglatin(word) + consonant_suffix
     else: # First letter is a vowel
         return_word = word + vowel_suffix
+
 
     if special_char_flag:
         return_word = return_word + last_char
