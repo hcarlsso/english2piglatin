@@ -1,4 +1,7 @@
 # english2piglatin
+
+[![Build Status](https://travis-ci.org/hcarlsso/english2piglatin.svg?branch=master)](https://travis-ci.org/hcarlsso/english2piglatin)
+
 Wasp software course
 
 This program will translate _english_ to [pig latin](https://en.wikipedia.org/wiki/Pig_Latin).
