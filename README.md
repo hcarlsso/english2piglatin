@@ -12,7 +12,13 @@ Supports English to Piglatin conversion for text provided as user input.
 
 To execute:
 
+Input via command line:
+
     python main.py
+
+Input via file <FILE>:
+
+    python main.py --file <FILE>
 
 
 To get the git commit graph:
