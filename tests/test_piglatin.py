@@ -3,7 +3,20 @@
 import unittest
 from src import piglatin
 
+import main
+import os
+
 class TestStringMethods(unittest.TestCase):
+
+    def test_read_from_file(self):
+
+        path = os.path.dirname(__file__)
+
+        filepath = os.sep.join([path, 'testFile.txt'])
+
+        value = main.file_input(filepath)
+
+        self.assertEqual(value, 'This is a test.\n')
 
     def test_single_words(self):
 
